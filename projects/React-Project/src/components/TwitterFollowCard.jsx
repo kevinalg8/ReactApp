@@ -1,7 +1,20 @@
-//Todo lo que esta dentro del return son elementos 
+//Se llaman Hooks permiten añadir funcionalidad a los componentes es decir la reactividad
+import { useState } from 'react'
 
-export function TwitterFollowCard({userName, name, isFollowing}) {
-    console.log(isFollowing);
+//Todo lo que esta dentro del return son elementos 
+export function TwitterFollowCard({ userName, name}) {
+    const [isFollowing, setIsFollowing] = useState(false)
+
+
+
+    const text = isFollowing ? 'siguiendo' : 'seguir'
+    const bottonClassName = isFollowing 
+    ? 'tw-followCard-button is-following'
+    : 'tw-followCard-button'
+
+    const handleClick = () =>{
+        setIsFollowing(!isFollowing)
+    }
 
     //En la linea 10 estamos evaluando dicho elemento y a su vez renderizo
     return (
@@ -14,7 +27,7 @@ export function TwitterFollowCard({userName, name, isFollowing}) {
                 </div>
             </header>
             <aside>
-                <button className='tw-followCard-button'>Seguir</button>
+                <button className={bottonClassName} onClick={handleClick}>{text}</button>
             </aside>
         </article>
     )
