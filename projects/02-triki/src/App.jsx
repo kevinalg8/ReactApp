@@ -1,53 +1,66 @@
-  import { useState } from 'react'
+//import { useState } from 'react'
+import { useState } from 'react'
 import './styles/index.css'
+
+const TURNS = {
+  X: 'x',
+  O: 'o'
+}
+
+const Square = ({ children, isSelected ,updateBoard, index }) => {
+  const className= `square ${isSelected ? 'is-selected': ''}`
   
-  const TURNS = {
-    x: 'x',
-    O: 'o'
+  const handleClick = ()=>{
+    updateBoard(index)
   }
+  return (
+    <div onClick={handleClick} className={className}>
+      {children}
+    </div>
+  )
+}
 
-  
-  const Square = ({children, updateBoard, i,isSelected}) =>{
-    const className = `square ${isSelected ? 'is-selected' :''}`
 
-    const handleClick=()=>{
-      updateBoard(i)
-    }
-    return(
-      <div onClick={handleClick} className={className}>
-        {children}
-      </div>
-    )
-  }
-  
-  function App() {
-  const [board, setBoard] = useState(Array(9).fill(null))
 
-  const [turn, setTurn]= useState(TURNS.X)
+function App() {
+  const [board, setBoard] = useState(
+    Array(9).fill(null)
+  )
+  const[turn,setTurn] = useState(TURNS.X)
 
-  const updateBoard = ()=>{
-    const newBoard= [... board]
-    newBoard[i]= turn
+  const updateBoard =(index)=>{
+    //No actualizamos las posiciones si ya existen posiciones en la tabla
+    if (board[index]) return
+
+    //Aqui actualizamos el tablero
+    const newBoard= [...board]
+    newBoard[index]= turn
     setBoard(newBoard)
-    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
+    //cambiar el turno
+    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
-
   }
+
+
   return (
     <main className='board'>
       <h1>Triki</h1>
       <section className="game">
         {
-          board.map((_, index) =>{
-            return(
-              <Square key={index} index={index} updateBoard={updateBoard}>
+          board.map((_, index) => {
+            return (
+              <Square
+                key={index}
+                index={index}
+                updateBoard={updateBoard}
+              >
                 {board[index]}
               </Square>
             )
           })
         }
-
       </section>
+
 
       <section className="turn">
         <Square isSelected={turn === TURNS.X}>{TURNS.X}</Square>
@@ -57,5 +70,6 @@ import './styles/index.css'
     </main>
   )
 }
+//Dentro de la clase board es donde estamos renderizando el tablero
 
 export default App
