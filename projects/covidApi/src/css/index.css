@@ -3,15 +3,9 @@
     padding: 0;
     margin: 0;
 }
-section{
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    font-family: system-ui;
-}
 .dad{
-    margin-top: 50px;
-    border-radius: 60px;
-    padding: 30px;
-    width: 100vh;
+    display: flex;
+    flex-flow: column wrap;
+    text-align: center;
+    font-family: system-ui;
 }
