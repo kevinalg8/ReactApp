@@ -7,10 +7,10 @@ const TURNS = {
   O: 'o'
 }
 
-const Square = ({ children, isSelected ,updateBoard, index }) => {
-  const className= `square ${isSelected ? 'is-selected': ''}`
-  
-  const handleClick = ()=>{
+const Square = ({ children, isSelected, updateBoard, index }) => {
+  const className = `square ${isSelected ? 'is-selected' : ''}`
+
+  const handleClick = () => {
     updateBoard(index)
   }
   return (
@@ -21,24 +21,51 @@ const Square = ({ children, isSelected ,updateBoard, index }) => {
 }
 
 
+const WINNER_COMBO = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
+]
+
+
 
 function App() {
   const [board, setBoard] = useState(
     Array(9).fill(null)
   )
-  const[turn,setTurn] = useState(TURNS.X)
+  const [turn, setTurn] = useState(TURNS.X)
+  const [winner, setWinner] = useState(null)//Null es que no hay ganador y false es que hay empate
+  const checkWinner = (boardToCheck) => {
+    for (const combo of WINNER_COMBO) {
+      const [a, b, c] = combo
+      if (boardToCheck[a] && boardToCheck[a] === boardToCheck[b] && boardToCheck[a] === boardToCheck[c]) {
+        return boardToCheck[a]
+      }
+    }
+    return null
+  }
 
-  const updateBoard =(index)=>{
+  const updateBoard = (index) => {
     //No actualizamos las posiciones si ya existen posiciones en la tabla
-    if (board[index]) return
+    if (board[index] || winner) return
 
     //Aqui actualizamos el tablero
-    const newBoard= [...board]
-    newBoard[index]= turn
+    const newBoard = [...board]
+    newBoard[index] = turn
     setBoard(newBoard)
     //cambiar el turno
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
+
+    const newWinner = checkWinner(newBoard)
+    if (newWinner) {
+      setWinner(newWinner)
+    }
   }
 
 
@@ -67,6 +94,22 @@ function App() {
         <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
 
       </section>
+      {
+        winner != null && (
+          <section className='winner'>
+            <div className='text'>
+              <h2>
+                {
+                  winner=== false
+                  ? 'empate'
+                  : 'Gano' + winner
+                }
+              </h2>
+            </div>
+
+          </section>
+        )
+      }
     </main>
   )
 }
