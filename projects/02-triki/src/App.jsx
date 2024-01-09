@@ -50,6 +50,12 @@ function App() {
     return null
   }
 
+  const newGame=()=>{
+    setBoard(Array(9).fill(null))
+    setTurn(TURNS.X)
+    setWinner(null)
+  }
+
   const updateBoard = (index) => {
     //No actualizamos las posiciones si ya existen posiciones en la tabla
     if (board[index] || winner) return
@@ -102,9 +108,17 @@ function App() {
                 {
                   winner=== false
                   ? 'empate'
-                  : 'Gano' + winner
+                  : 'Gano:' + winner
                 }
               </h2>
+              <header>
+                {winner && <Square>{winner}</Square>}
+              </header>
+              <footer>
+                <button onClick={newGame}>
+                  Empezar de nuevo
+                </button>
+              </footer>
             </div>
 
           </section>
