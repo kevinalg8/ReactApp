@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import './index.css'
 
-let url = `https://pokeapi.co/api/v2/pokemon/804`
+
+let number = Math.ceil(Math.random() * 1000)
+let url = `https://pokeapi.co/api/v2/pokemon/${number}`
 
 export default function App() {
   const [pokemon, setDataPokemon] = useState(null)
@@ -29,4 +31,8 @@ export default function App() {
   )
 }
 
-//{pokemon.forEach((poke, index) =><p key={index}>{poke}</p>)}
+/*
+{pokemon.map && <p>Tipo de pokemon: <strong>{pokemon.types[0].type.name}</strong></p>}
+*/
+
+// {pokemon.map((poke, index)=><p key={index}>{poke.name}</p>)}
