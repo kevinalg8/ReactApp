@@ -1,29 +1,29 @@
 import { useState, useEffect } from 'react'
 import './index.css'
 
-let url = 'https://pokeapi.co/api/v2/pokemon/'
+let url = `https://pokeapi.co/api/v2/pokemon/804`
 
 export default function App() {
-  const [pokemon, setDataPokemon]=useState([])
-  //const [pokemonImage, setDataPokemonImage]=useState([])
+  const [pokemon, setDataPokemon] = useState(null)
 
-
-  //Es un estado que depende del otro sin ID no hay foto del pokemon
-  useEffect(()=>{
+  useEffect(() => {
     fetch(url)
-    .then(res => res.json())
-    .then(data =>{
-      setDataPokemon(data.results)
-      console.log(data.results);
-    })
-  },[])
+      .then(res => res.json())
+      .then(data => {
+        setDataPokemon(data)
+        console.log(data.types[0].type.name);
+      })
+  }, [])
 
   return (
     <>
-      <h1 style={{textAlign:'center'}}>Poke API</h1>
+      <h1 style={{ textAlign: 'center' }}>Poke API</h1>
       <section className='container'>
-      {pokemon.map((poke, index)=><p key={index}>{poke.name}</p>)}
-
+        <div>
+          {pokemon && <p>{pokemon.name}</p>}
+          {pokemon && (<img src={pokemon.sprites.front_default} />)}
+          {pokemon && <p>Tipo de pokemon: <strong>{pokemon.types[0].type.name}</strong></p>}
+        </div>
       </section>
     </>
   )

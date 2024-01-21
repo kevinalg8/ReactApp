@@ -6,9 +6,21 @@
 
 .container{
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     align-items: center;
+    text-align: center;
     justify-content: space-evenly;
     background-color: gray;
-    height: 100px;
+    height: 200px;
+}
+
+.container div{
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 5px 5px 20px black;
+    width:19em;
+}
+
+.container img{
+    height: 120px;
 }
