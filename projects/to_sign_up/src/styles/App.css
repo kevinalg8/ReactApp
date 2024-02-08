@@ -1,0 +1,11 @@
+*{
+  margin: auto;
+  padding: auto;
+  box-sizing: border-box;
+}
+.Form{
+  display: flex;
+  text-align: center;
+  flex-flow: row;
+  border-color: black;
+}
