@@ -1,48 +1,43 @@
-const Button = (props) =>{
-    return(
-        <button>{props.text}</button>
-    )
+const Button = ({ text }) => {
+
+    const handeClickButton = (title) => { 
+        console.log('hande click ' +title);
+     }
+    return <button onClick={() => { handeClickButton(text) }}>{text}</button>
+
 }
 
-const OnlineText = ()=>{
-    return(
-        <div>
-            <h3>Online</h3>
-        </div>
-    )
-}
+const WelcomeText = ({ user }) => (user ? <h3>Online</h3> : <h3>Offline</h3>)
 
-const OfflineText = ()=>{
-    return(
-        <div>
-            <h3>Offline</h3>
-        </div>
-    )
-}
+const ItemFrut = ({ frut }) => (
+    <li>
+        {frut}
+    </li>
+)
 
-const App = () =>{
+const App = () => {
     const title = "Titulo hecho desde "
     const user = true
 
-    const fruts =["🍏","🍌","🍑","🍇"]
+    const fruts = ["🍏", "🍌", "🍑", "🍇"]
 
     return (
         <>
-        <h1>{title}React</h1>
-        <img src="https://picsum.photos/200" alt="" />
-        <Button text="boton-1"/>
-        <Button text="boton-2"/>
-        <Button text="boton-3"/>
-        {
-            user ? <OnlineText/> : <OfflineText/>
-        }
-        <ul>
-            {
-                fruts.map((frut, index)=>(
-                    <li key={index}>{frut}</li>
-                ))
-            }
-        </ul>
+            <h1>{title}React</h1>
+            <img src="https://picsum.photos/200" alt="" />
+            <Button text="Registro" />
+            <Button text="Inicio de sesion" />
+            <Button text="Salir" />
+
+            <WelcomeText user={user} />
+
+            <ul>
+                {
+                    fruts.map((frut, index) => (
+                        <ItemFrut key={index} frut={frut} />
+                    ))
+                }
+            </ul>
         </>
     )
 }
