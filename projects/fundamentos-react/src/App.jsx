@@ -1,28 +1,16 @@
-const Button = ({ text }) => {
-
-    const handeClickButton = (title) => { 
-        console.log('hande click ' +title);
-     }
-    return <button onClick={() => { handeClickButton(text) }}>{text}</button>
-
-}
-
-const WelcomeText = ({ user }) => (user ? <h3>Online</h3> : <h3>Offline</h3>)
-
-const ItemFrut = ({ frut }) => (
-    <li>
-        {frut}
-    </li>
-)
+//Componentes
+import Button from "./components/Button.jsx"
+import WelcomeText from "./components/WelcomeText.jsx"  
+import ListFruts from "./components/fruts/ListFruits.jsx"
+import ButtonState from "./components/ButtonState.jsx"
 
 const App = () => {
     const title = "Titulo hecho desde "
-    const user = true
-
-    const fruts = ["🍏", "🍌", "🍑", "🍇"]
-
+    const user = false
+    
     return (
         <>
+            <ButtonState/>
             <h1>{title}React</h1>
             <img src="https://picsum.photos/200" alt="" />
             <Button text="Registro" />
@@ -30,14 +18,7 @@ const App = () => {
             <Button text="Salir" />
 
             <WelcomeText user={user} />
-
-            <ul>
-                {
-                    fruts.map((frut, index) => (
-                        <ItemFrut key={index} frut={frut} />
-                    ))
-                }
-            </ul>
+            <ListFruts/>
         </>
     )
 }
