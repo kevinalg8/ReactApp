@@ -1,11 +1,12 @@
-import NoControlado from "./components/NoControlado"
+import Controlado from "./components/Controlado"
 
 function App() {
 
   return (
     <div className="container">
-      <h1>Formularios</h1>
-      <NoControlado/>
+      <br />
+      <h1>Formulario Controlados</h1>
+      <Controlado/>
     </div>
   )
 }
